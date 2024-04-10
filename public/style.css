@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.bg-custom-color{
+    background-color: #001a41;
+}
+.header-section{
+    padding: 20px;
+    background: #001a41;
+    color: white;
+    /* 001a41 */
+}
+.post-box{
+    padding: 8% 5%;
+    background: #d6e5ff;
+    /* d6e5ff */
+}
+.post-box img{
+    height: 200px;
+}
+a{
+    text-decoration: none;
+}
+.card-body{
+    height: 200px;
+}
+.contact-us{
+    background: #f0f0f0;
+    padding: 50px;
+}   
+.card-title{
+    height: 70px;
+}
+.card-text{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    padding: 5px;
+}
+/* single post */
+.single-post{
+    width: 70%;
+}
+.comments img{
+    height: 32px;
+    border-radius: 100%;
+}
