@@ -47,3 +47,10 @@ a{
     height: 32px;
     border-radius: 100%;
 }
+.common{
+    height:80vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 30px;
+}

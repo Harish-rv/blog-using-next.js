@@ -7,6 +7,7 @@ export default function posts(req){
     const postId = req.params.id;
     const [posts,setPosts] = useState([]);
     const [comments,setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [err,setError] = useState();
 
 
@@ -27,21 +28,25 @@ export default function posts(req){
                 setComments(result2);
             } catch (error) {
                 setError(error.message);
+            } finally {
+                setLoading(false); 
             }
         };
     
         fetchData();
     }, []);
 
-    const date = "2024-04-09T21:50:22Z";
-    console.log('-',posts);
-    const formattedTime = format(new Date(date), 'dd/MM/yyyy HH:mm:ss');
-    const htmlContent = '<div><h1>Hello, World!</h1><p>This is HTML content.</p></div>';
+    if(loading){
+        return <div className="common">Loading...</div>;
+      }
+    
+    if(err){
+      return <div className="common">Error: {err}</div>;
+    }
+
+    const formattedTime = format(new Date("2024-04-09T21:50:22Z"), 'dd/MM/yyyy HH:mm:ss');
     return(<>
         <div className="col-lg-12 my-4 d-flex flex-column align-items-center justify-content-center">
-            {err ? (
-                <p>Error: {err}</p>
-            ) : (
             <div className="card shadow-lg p-5 single-post mt-5">
                 <h1>{posts.title}</h1>
                 <p className="my-3"><strong>Published on </strong>: {formattedTime}</p>
@@ -67,7 +72,6 @@ export default function posts(req){
                     </div>
                 </div>
             </div>
-            )}
         </div>
     </>
     )
