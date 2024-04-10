@@ -1,4 +1,4 @@
-# Blog Using
+# Blog Using NEXT.JS
 
 Download the project or clone using GI
 
