@@ -14,8 +14,3 @@ npm install
 npm run dev
 ```
 
-### 👉 Build Command
-
-```bash
-npm run build
-```
