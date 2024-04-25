@@ -54,3 +54,6 @@ a{
     display: flex;
     font-size: 30px;
 }
+.text-start a{
+    font-size: 30px;
+}
