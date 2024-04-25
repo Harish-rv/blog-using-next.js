@@ -3,12 +3,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { format } from 'date-fns';
 
-export default function posts(req){
+export default function Posts(req: any){
     const postId = req.params.id;
-    const [posts,setPosts] = useState([]);
-    const [comments,setComments] = useState([]);
+    const [posts,setPosts] = useState<any>();
+    const [comments,setComments] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [err,setError] = useState();
+    const [err,setError] = useState('');
 
 
     useEffect(() => {
@@ -27,14 +27,17 @@ export default function posts(req){
                 setPosts(result1);
                 setComments(result2);
             } catch (error) {
-                setError(error.message);
+                let errorMessage = "Failed to Fetch Data";
+                if (error instanceof Error) {
+                setError(error.message)
+                }
             } finally {
                 setLoading(false); 
             }
         };
     
         fetchData();
-    }, []);
+    },[]);
 
     if(loading){
         return <div className="common">Loading...</div>;
@@ -50,7 +53,7 @@ export default function posts(req){
             <div className="card shadow-lg p-5 single-post mt-5">
                 <h1>{posts.title}</h1>
                 <p className="my-3"><strong>Published on </strong>: {formattedTime}</p>
-                <img className="mb-4" src={posts.social_image} alt="" title={posts.title} />
+                <img className="mb-4" src={posts.social_image} alt="img" title={posts.title} />
                 <div className="body-content">
                     <div dangerouslySetInnerHTML={{ __html: posts.body_html }} />
                 </div>
@@ -61,8 +64,8 @@ export default function posts(req){
                     <h3 className="py-3">comments({posts.comments_count})</h3>
                     <div className="comments-body">
                         {comments.map((comments)=>(
-                        <ul className="d-flex">
-                            <li className="col-0 rounded-2"><img src={comments.user.profile_image} /></li>
+                        <ul className="d-flex" key={comments.user.id}>
+                            <li className="col-0 rounded-2"><img src={comments.user.profile_image} alt="img"/></li>
                             <li className="col-11 mx-4 shadow-sm p-2 rounded-3">
                                 <strong>{comments.user.name}</strong>
                                 <span dangerouslySetInnerHTML={{ __html: comments.body_html }} />

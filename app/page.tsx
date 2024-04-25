@@ -1,13 +1,12 @@
 "use client"
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  const [posts,setPosts] = useState([]);
+  const [posts,setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [err,setError] = useState();
+  const [err,setError] = useState('');
 
   useEffect(()=>{
     const fetchData = async ()=>{
@@ -20,7 +19,10 @@ export default function Home() {
         
         setPosts(result);
       } catch (error) {
-        setError(error.message);
+        let errorMessage = "Failed to Fetch Data";
+        if (error instanceof Error) {
+          setError(error.message)
+        }
       } finally {
         setLoading(false); 
       }
@@ -41,7 +43,7 @@ export default function Home() {
       <div className="row post-box">
         <h3 className="mb-5">Blog Posts</h3>
         {posts.map((post) => (
-          <div className="col-lg-3 col-md-4 col-12">
+          <div className="col-lg-3 col-md-4 col-12" key={post.id}>
             <Link rel="stylesheet" href={'posts/'+post.id}>
             <div className="card border-0 shadow-lg">
               <img src={post.social_image} alt="image" />
